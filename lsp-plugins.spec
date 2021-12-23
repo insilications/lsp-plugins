@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : lsp-plugins
 Version  : 1.1.31
-Release  : 214
+Release  : 216
 URL      : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Summary  : No detailed summary available
@@ -204,7 +204,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640221449
+export SOURCE_DATE_EPOCH=1640222299
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -281,13 +281,13 @@ export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 export PLASMA_USE_QT_SCALING=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 ## altflags1 end
-make  %{?_smp_mflags}   BUILD_MODULES="ladspa lv2" PREFIX=/usr SHELL="/bin/bash -x" LIB_PATH="/usr/lib64" V=1 VERBOSE=1 V=1 VERBOSE=1
+make  %{?_smp_mflags}   LV2_UI=0 VST_UI=0 BUILD_R3D_BACKENDS=0 BUILD_MODULES="ladspa lv2" PREFIX=/usr LIB_PATH="/usr/lib64" V=1 VERBOSE=1 V=1 VERBOSE=1
 
 
 %install
-export SOURCE_DATE_EPOCH=1640221449
+export SOURCE_DATE_EPOCH=1640222299
 rm -rf %{buildroot}
-%make_install BUILD_MODULES="ladspa lv2" PREFIX=/usr SHELL="/bin/bash -x" LIB_PATH="/usr/lib64" V=1 VERBOSE=1
+%make_install LV2_UI=0 VST_UI=0 BUILD_R3D_BACKENDS=0 BUILD_MODULES="ladspa lv2" PREFIX=/usr LIB_PATH="/usr/lib64" V=1 VERBOSE=1
 
 %files
 %defattr(-,root,root,-)
