@@ -1,0 +1,7 @@
+--enable-shared
+--enable-static
+--enable-experimental=yes
+--with-lv2
+--enable-ladspa
+--with-ladspa-dir=/usr/lib64/ladspa
+--with-lv2-dir=/usr/lib64/lv2
