@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : lsp-plugins
 Version  : 1.1.31
-Release  : 217
+Release  : 218
 URL      : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Summary  : No detailed summary available
@@ -204,6 +204,15 @@ Requires: lsp-plugins = %{version}-%{release}
 dev components for the lsp-plugins package.
 
 
+%package staticdev
+Summary: staticdev components for the lsp-plugins package.
+Group: Default
+Requires: lsp-plugins-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the lsp-plugins package.
+
+
 %prep
 %setup -q -n lsp-plugins-clr
 cd %{_builddir}/lsp-plugins-clr
@@ -214,7 +223,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640222561
+export SOURCE_DATE_EPOCH=1640224889
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -295,7 +304,7 @@ make  %{?_smp_mflags}   LV2_UI=0 VST_UI=0 BUILD_R3D_BACKENDS="" BUILD_MODULES="l
 
 
 %install
-export SOURCE_DATE_EPOCH=1640222561
+export SOURCE_DATE_EPOCH=1640224889
 rm -rf %{buildroot}
 %make_install LV2_UI=0 VST_UI=0 BUILD_R3D_BACKENDS="" BUILD_MODULES="ladspa lv2" PREFIX=/usr LIB_PATH="/usr/lib64" V=1 VERBOSE=1
 
@@ -430,3 +439,8 @@ rm -rf %{buildroot}
 /usr/lib64/lv2/lsp-plugins.lv2/trigger_midi_stereo.ttl
 /usr/lib64/lv2/lsp-plugins.lv2/trigger_mono.ttl
 /usr/lib64/lv2/lsp-plugins.lv2/trigger_stereo.ttl
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/lsp-plugins-ladspa.a
+/usr/lib64/lsp-plugins-lv2.a
