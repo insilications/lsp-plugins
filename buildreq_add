@@ -80,6 +80,9 @@ libedit-dev
 libffi-dev
 libffi-staticdev
 libgcc1
+libjpeg-turbo
+libjpeg-turbo-dev
+libjpeg-turbo-staticdev
 liblo
 liblo-dev
 liblo-staticdev
@@ -122,6 +125,7 @@ pcre2-dev
 pcre2-staticdev
 pcre-dev
 pcre-staticdev
+php
 pkg-config
 pkg-config-dev
 procps-ng

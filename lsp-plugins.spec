@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : lsp-plugins
 Version  : 1.1.31
-Release  : 224
+Release  : 230
 URL      : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Summary  : No detailed summary available
@@ -94,6 +94,9 @@ BuildRequires : libedit-dev
 BuildRequires : libffi-dev
 BuildRequires : libffi-staticdev
 BuildRequires : libgcc1
+BuildRequires : libjpeg-turbo
+BuildRequires : libjpeg-turbo-dev
+BuildRequires : libjpeg-turbo-staticdev
 BuildRequires : liblo
 BuildRequires : liblo-dev
 BuildRequires : liblo-staticdev
@@ -136,6 +139,7 @@ BuildRequires : pcre-dev
 BuildRequires : pcre-staticdev
 BuildRequires : pcre2-dev
 BuildRequires : pcre2-staticdev
+BuildRequires : php
 BuildRequires : pkg-config
 BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(fftw3f)
@@ -204,7 +208,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640537269
+export SOURCE_DATE_EPOCH=1640543551
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -212,20 +216,12 @@ export NM=gcc-nm
 ## altflags1 content
 ## altflags1
 unset ASFLAGS
-export CFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export ASMFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-## -fno-tree-vectorize: disable -ftree-vectorize thus disable -ftree-loop-vectorize and -ftree-slp-vectorize -fopt-info-vec
-## -Ofast -ffast-math
-## -funroll-loops maybe dangerous
-## -Wl,-z,max-page-size=0x1000
-## -pthread -lpthread
-## -Wl,-Bsymbolic-functions
-export CXXFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-#
-export FCFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-#
-export LDFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export CFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export ASMFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export CXXFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export FCFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export FFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export LDFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
 #
 export AR=/usr/bin/gcc-ar
 export RANLIB=/usr/bin/gcc-ranlib
@@ -289,11 +285,11 @@ export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 export PLASMA_USE_QT_SCALING=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 ## altflags1 end
-make  %{?_smp_mflags}   LV2_UI=0 VST_UI=0 BUILD_R3D_BACKENDS="" BUILD_MODULES="ladspa lv2" PREFIX=/usr LIB_PATH="/usr/lib64" V=1 VERBOSE=1 V=1 VERBOSE=1
+make  %{?_smp_mflags}   PREFIX=/usr LIB_PATH="/usr/lib64" V=1 VERBOSE=1 V=1 VERBOSE=1
 
 
 %install
-export SOURCE_DATE_EPOCH=1640537269
+export SOURCE_DATE_EPOCH=1640543551
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -302,20 +298,12 @@ export NM=gcc-nm
 ## altflags1 content
 ## altflags1
 unset ASFLAGS
-export CFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export ASMFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-## -fno-tree-vectorize: disable -ftree-vectorize thus disable -ftree-loop-vectorize and -ftree-slp-vectorize -fopt-info-vec
-## -Ofast -ffast-math
-## -funroll-loops maybe dangerous
-## -Wl,-z,max-page-size=0x1000
-## -pthread -lpthread
-## -Wl,-Bsymbolic-functions
-export CXXFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-#
-export FCFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-#
-export LDFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export CFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export ASMFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export CXXFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export FCFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export FFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export LDFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
 #
 export AR=/usr/bin/gcc-ar
 export RANLIB=/usr/bin/gcc-ranlib
@@ -379,7 +367,7 @@ export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 export PLASMA_USE_QT_SCALING=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 ## altflags1 end
-%make_install LV2_UI=0 VST_UI=0 BUILD_R3D_BACKENDS="" BUILD_MODULES="ladspa lv2" PREFIX=/usr LIB_PATH="/usr/lib64" V=1 VERBOSE=1
+%make_install -- PREFIX="/usr" LIB_PATH="/usr/lib64" V=1 VERBOSE=1 SHELL="/bin/bash -x"
 
 %files
 %defattr(-,root,root,-)
