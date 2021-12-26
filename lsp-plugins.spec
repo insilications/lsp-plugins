@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : lsp-plugins
 Version  : 1.1.31
-Release  : 219
+Release  : 221
 URL      : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Summary  : No detailed summary available
@@ -223,7 +223,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640531643
+export SOURCE_DATE_EPOCH=1640532450
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -304,7 +304,7 @@ make  %{?_smp_mflags}   LV2_UI=0 VST_UI=0 BUILD_R3D_BACKENDS="" BUILD_MODULES="l
 
 
 %install
-export SOURCE_DATE_EPOCH=1640531643
+export SOURCE_DATE_EPOCH=1640532450
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
