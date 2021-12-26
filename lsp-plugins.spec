@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : lsp-plugins
 Version  : 1.1.31
-Release  : 222
+Release  : 224
 URL      : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/lsp-plugins/lsp-plugins-v1.1.31.tar.gz
 Summary  : No detailed summary available
@@ -194,25 +194,6 @@ BuildRequires : zstd-staticdev
 LSP (Linux Studio Plugins) is a collection of open-source plugins
 currently compatible with LADSPA, LV2 and LinuxVST formats.
 
-%package dev
-Summary: dev components for the lsp-plugins package.
-Group: Development
-Provides: lsp-plugins-devel = %{version}-%{release}
-Requires: lsp-plugins = %{version}-%{release}
-
-%description dev
-dev components for the lsp-plugins package.
-
-
-%package staticdev
-Summary: staticdev components for the lsp-plugins package.
-Group: Default
-Requires: lsp-plugins-dev = %{version}-%{release}
-
-%description staticdev
-staticdev components for the lsp-plugins package.
-
-
 %prep
 %setup -q -n lsp-plugins-clr
 cd %{_builddir}/lsp-plugins-clr
@@ -223,7 +204,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640532702
+export SOURCE_DATE_EPOCH=1640537269
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -231,13 +212,21 @@ export NM=gcc-nm
 ## altflags1 content
 ## altflags1
 unset ASFLAGS
-export CFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export ASMFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export CXXFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FCFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export CFFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export LDFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export CFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export ASMFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+## -fno-tree-vectorize: disable -ftree-vectorize thus disable -ftree-loop-vectorize and -ftree-slp-vectorize -fopt-info-vec
+## -Ofast -ffast-math
+## -funroll-loops maybe dangerous
+## -Wl,-z,max-page-size=0x1000
+## -pthread -lpthread
+## -Wl,-Bsymbolic-functions
+export CXXFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+#
+export FCFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export FFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+#
+export LDFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+#
 export AR=/usr/bin/gcc-ar
 export RANLIB=/usr/bin/gcc-ranlib
 export NM=/usr/bin/gcc-nm
@@ -304,7 +293,7 @@ make  %{?_smp_mflags}   LV2_UI=0 VST_UI=0 BUILD_R3D_BACKENDS="" BUILD_MODULES="l
 
 
 %install
-export SOURCE_DATE_EPOCH=1640532702
+export SOURCE_DATE_EPOCH=1640537269
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -313,13 +302,21 @@ export NM=gcc-nm
 ## altflags1 content
 ## altflags1
 unset ASFLAGS
-export CFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export ASMFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export CXXFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FCFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export CFFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export LDFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export CFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export ASMFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+## -fno-tree-vectorize: disable -ftree-vectorize thus disable -ftree-loop-vectorize and -ftree-slp-vectorize -fopt-info-vec
+## -Ofast -ffast-math
+## -funroll-loops maybe dangerous
+## -Wl,-z,max-page-size=0x1000
+## -pthread -lpthread
+## -Wl,-Bsymbolic-functions
+export CXXFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+#
+export FCFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export FFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+#
+export LDFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -O3 --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+#
 export AR=/usr/bin/gcc-ar
 export RANLIB=/usr/bin/gcc-ranlib
 export NM=/usr/bin/gcc-nm
@@ -386,137 +383,3 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 %files
 %defattr(-,root,root,-)
-
-%files dev
-%defattr(-,root,root,-)
-/usr/lib64/ladspa/lsp-plugins-ladspa.so
-/usr/lib64/lv2/lsp-plugins.lv2/art_delay_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/art_delay_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/comp_delay_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/comp_delay_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/comp_delay_x2_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/compressor_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/compressor_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/compressor_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/compressor_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/crossover_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/crossover_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/crossover_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/crossover_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/dyna_processor_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/dyna_processor_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/dyna_processor_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/dyna_processor_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/expander_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/expander_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/expander_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/expander_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/gate_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/gate_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/gate_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/gate_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/graph_equalizer_x16_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/graph_equalizer_x16_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/graph_equalizer_x16_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/graph_equalizer_x16_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/graph_equalizer_x32_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/graph_equalizer_x32_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/graph_equalizer_x32_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/graph_equalizer_x32_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/impulse_responses_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/impulse_responses_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/impulse_reverb_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/impulse_reverb_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/latency_meter.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/limiter_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/limiter_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/loud_comp_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/loud_comp_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/lsp-plugins-lv2.so
-/usr/lib64/lv2/lsp-plugins.lv2/manifest.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_compressor_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_compressor_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_compressor_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_compressor_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_expander_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_expander_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_expander_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_expander_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_gate_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_gate_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_gate_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/mb_gate_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/multisampler_x12.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/multisampler_x12_do.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/multisampler_x24.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/multisampler_x24_do.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/multisampler_x48.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/multisampler_x48_do.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/oscillator_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/oscilloscope_x1.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/oscilloscope_x2.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/oscilloscope_x4.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/para_equalizer_x16_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/para_equalizer_x16_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/para_equalizer_x16_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/para_equalizer_x16_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/para_equalizer_x32_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/para_equalizer_x32_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/para_equalizer_x32_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/para_equalizer_x32_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/phase_detector.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/profiler_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/profiler_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/room_builder_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/room_builder_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sampler_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sampler_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_compressor_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_compressor_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_compressor_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_compressor_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_dyna_processor_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_dyna_processor_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_dyna_processor_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_dyna_processor_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_expander_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_expander_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_expander_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_expander_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_gate_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_gate_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_gate_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_gate_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_limiter_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_limiter_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_compressor_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_compressor_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_compressor_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_compressor_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_expander_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_expander_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_expander_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_expander_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_gate_lr.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_gate_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_gate_ms.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/sc_mb_gate_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/slap_delay_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/slap_delay_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/spectrum_analyzer_x1.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/spectrum_analyzer_x12.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/spectrum_analyzer_x16.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/spectrum_analyzer_x2.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/spectrum_analyzer_x4.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/spectrum_analyzer_x8.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/surge_filter_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/surge_filter_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/trigger_midi_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/trigger_midi_stereo.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/trigger_mono.ttl
-/usr/lib64/lv2/lsp-plugins.lv2/trigger_stereo.ttl
-
-%files staticdev
-%defattr(-,root,root,-)
-/usr/lib64/lsp-plugins-ladspa.a
-/usr/lib64/lsp-plugins-lv2.a

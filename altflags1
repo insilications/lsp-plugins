@@ -1,12 +1,12 @@
 ## altflags1
 unset ASFLAGS
-export CFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export ASMFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export CXXFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FCFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export CFFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export LDFLAGS="-g3 -ggdb -O2 -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export CFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export ASMFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export CXXFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export FCFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export FFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+export LDFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Og -fexceptions -static-libstdc++ -static-libgcc -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wp,-D_REENTRANT -fuse-ld=bfd -fuse-linker-plugin -feliminate-unused-debug-types -Wl,-sort-common -Wno-error -pipe -ffat-lto-objects -fPIC"
+#
 export AR=/usr/bin/gcc-ar
 export RANLIB=/usr/bin/gcc-ranlib
 export NM=/usr/bin/gcc-nm
