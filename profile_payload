@@ -1,1 +1,2 @@
 make -j1 check V=1 VERBOSE=1 || :
+.build/lsp-plugins-profile impulse_reverb_stereo
